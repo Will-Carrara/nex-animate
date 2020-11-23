@@ -7,16 +7,15 @@ from model import inference
 import geonexl1g
 
 # set data directory
-L1G_directory = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
-sensor = 'G16'
-#L1G_directory = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
-#sensor = 'G17'
+#L1G_directory = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
+#sensor = 'G16'
+L1G_directory = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
+sensor = 'G17'
 
 # Parameters
-#tile = 'h09v03'
-tile = 'h16v05'
-year = 2019
-#dayofyear = 220
+tile = 'h09v03'
+#tile = 'h16v05'
+year = 2020
 hour = 18
 
 # Model checkpoint file
@@ -26,7 +25,7 @@ model, _ = inference.load_model(config_file)
 # Retrieve tiles
 files = []
 geo = geonexl1g.GeoNEXL1G(L1G_directory, sensor)
-for doy in range(220,222):
+for doy in range(200,250):
 	files.append(geo.files(tile=tile, year=year, dayofyear=doy))
 
 
