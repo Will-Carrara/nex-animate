@@ -25,7 +25,7 @@ model, _ = inference.load_model(config_file)
 # Retrieve tiles
 files = []
 geo = geonexl1g.GeoNEXL1G(L1G_directory, sensor)
-for doy in range(200,250):
+for doy in range(190,260):
 	files.append(geo.files(tile=tile, year=year, dayofyear=doy))
 
 
