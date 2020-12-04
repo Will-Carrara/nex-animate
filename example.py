@@ -34,12 +34,12 @@ model, _ = inference.load_model(config_file)
 # Retrieve tiles
 files = []
 geo = geonexl1g.GeoNEXL1G(L1G_directory, sensor)
-for doy in range(246,247):
+for doy in range(247,248):
 	files.append(geo.files(tile=tile, year=year, dayofyear=doy))
 
 files = pd.concat(files)
 files = files.sort_values(['dayofyear','hour','minute'])
-files = files[(files['hour'] >= 1) & (files['hour'] <= 24)]
+files = files[(files['hour'] >= 14) & (files['hour'] <= 24)]
 
 count = 0
 for i, row in files.iterrows():
@@ -59,7 +59,7 @@ for i, row in files.iterrows():
 	B = data[:,:,0:1]
 
 	# Scaling AHI closer to True Green
-	F = 0.03
+	F = 0.04
 	G = G * F + (1-F) * R
 
 	# Assemble Virtual RGB Image and Scale
