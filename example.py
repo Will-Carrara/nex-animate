@@ -39,7 +39,7 @@ for doy in range(190,250):
 
 files = pd.concat(files)
 files = files.sort_values(['dayofyear','hour','minute'])
-files = files[(files['hour'] >= 15) & (files['hour'] <= 22)]
+files = files[(files['hour'] >= 15) & (files['hour'] <= 23)]
 
 for i, row in files.iterrows():
 	f = row['file']#.values()	
@@ -57,7 +57,7 @@ for i, row in files.iterrows():
 	B = data[:,:,0:1]
 
 	# Scaling AHI closer to True Green
-	F = 0.13
+	F = 0.07
 	G = G * F + (1-F) * R
 
 	# Assemble Virtual RGB Image and Scale
