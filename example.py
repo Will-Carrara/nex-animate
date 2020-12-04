@@ -39,11 +39,13 @@ for doy in range(190,250):
 
 files = pd.concat(files)
 files = files.sort_values(['dayofyear','hour','minute'])
-files = files[(files['hour'] >= 15) & (files['hour'] <= 23)]
+files = files[(files['hour'] >= 14) & (files['hour'] <= 23)]
 
+count = 0
 for i, row in files.iterrows():
-	f = row['file']#.values()	
-	
+	f = row['file']#.values()
+	count = count + 1	
+	print(str(count),": proccesing:", f[-32:-4])	
 	# Read file
 	dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
 	data = dataobj.load()
@@ -57,7 +59,7 @@ for i, row in files.iterrows():
 	B = data[:,:,0:1]
 
 	# Scaling AHI closer to True Green
-	F = 0.07
+	F = 0.
 	G = G * F + (1-F) * R
 
 	# Assemble Virtual RGB Image and Scale
@@ -70,12 +72,7 @@ for i, row in files.iterrows():
 	plt.imshow(virtual_rgb**0.5)
 	plt.axis('off')
 	plt.tight_layout()
-	plt.savefig(f[-43:-4]+'.png')
+	#plt.savefig(f[-43:-4]+'.png')
+	plt.savefig(f[-32:-4]+'.png')
 	plt.close()
 
-fp_in = "*.png"
-fp_out = "nex.gif"
-
-img, *imgs = [Image.open(f) for f in sorted(glob.glob(fp_in))]
-img.save(fp=fp_out, format='GIF', append_images=imgs,
-         save_all=True, duration=25, loop=0)
