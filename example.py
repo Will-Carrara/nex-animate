@@ -39,7 +39,7 @@ for doy in range(190,250):
 
 files = pd.concat(files)
 files = files.sort_values(['dayofyear','hour','minute'])
-files = files[(files['hour'] >= 14) & (files['hour'] <= 21)]
+files = files[(files['hour'] >= 15) & (files['hour'] <= 22)]
 
 for i, row in files.iterrows():
 	f = row['file']#.values()	
@@ -57,7 +57,7 @@ for i, row in files.iterrows():
 	B = data[:,:,0:1]
 
 	# Scaling AHI closer to True Green
-	F = 0.09
+	F = 0.13
 	G = G * F + (1-F) * R
 
 	# Assemble Virtual RGB Image and Scale
@@ -78,5 +78,4 @@ fp_out = "nex.gif"
 
 img, *imgs = [Image.open(f) for f in sorted(glob.glob(fp_in))]
 img.save(fp=fp_out, format='GIF', append_images=imgs,
-         save_all=True, duration=15, loop=0)
-os.remove('*.png')
+         save_all=True, duration=25, loop=0)
