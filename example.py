@@ -1,4 +1,6 @@
 import os
+import glob
+from PIL import Image
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -35,15 +37,9 @@ geo = geonexl1g.GeoNEXL1G(L1G_directory, sensor)
 for doy in range(190,250):
 	files.append(geo.files(tile=tile, year=year, dayofyear=doy))
 
-
-print(len(files))
 files = pd.concat(files)
-print(len(files))
-
 files = files.sort_values(['dayofyear','hour','minute'])
-files = files[(files['hour'] >= 8) & (files['hour'] <= 17)]
-
-
+files = files[(files['hour'] >= 14) & (files['hour'] <= 20)]
 
 for i, row in files.iterrows():
 	f = row['file']#.values()	
@@ -76,7 +72,11 @@ for i, row in files.iterrows():
 	plt.tight_layout()
 	plt.savefig(f[-43:-4]+'.png')
 	plt.close()
-'''
-ffmpeg -r 15 -f image2 -s 1920x1080 -i animation/rgb-%03d.png -crf 25  -pix_fmt yuv420p hurricane.mp4
-'''
 
+fp_in = "*.png"
+fp_out = "nex.gif"
+
+img, *imgs = [Image.open(f) for f in sorted(glob.glob(fp_in))]
+img.save(fp=fp_out, format='GIF', append_images=imgs,
+         save_all=True, duration=15, loop=0)
+os.remove('*.png')
