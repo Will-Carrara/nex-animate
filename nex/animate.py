@@ -35,7 +35,7 @@ import numpy as np
 
 # utility files
 from utils.model import inference
-from utils import geonexl1g
+from utils import geonexl1g, nex_utils
 
 # current directory
 w = os.path.join(os.path.dirname(__file__), '..')
@@ -84,7 +84,7 @@ def animate(path):
 
         # iterate counter
         count = count + 1
-        print(str(count)+": proccesing: "+ f[-32:-4])
+        print(str(count)+": processing: "+ f[-32:-4])
 
         # read file
         dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
@@ -113,5 +113,5 @@ def animate(path):
         plt.axis('off')
         plt.tight_layout()
         #plt.savefig(f[-43:-4]+'.png')
-        plt.savefig(f[-32:-4]+'.png')
+        plt.savefig('images/'+f[-32:-4]+'.png')
         plt.close()
