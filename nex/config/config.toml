@@ -1,0 +1,11 @@
+# Satellite configuration file
+
+# [SAMPLE_FORMAT]
+#    collection = 'SATELLITE/DATA/PATH'  # path to earth engine data       (REQUIRED)
+#    bands = ['Bx']                      # bands of interest               (REQUIRED)
+#    names = ['eto']                     # corresponding lower case names  (REQUIRED)
+
+[ANIMATE]
+   collection = 'projects/climate-engine/cimis/daily'
+   bands = ['ETo']
+   names = ['eto']

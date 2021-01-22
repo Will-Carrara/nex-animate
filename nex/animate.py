@@ -44,8 +44,8 @@ files = files[(files['hour'] >= 14) & (files['hour'] <= 24)]
 count = 0
 for i, row in files.iterrows():
 	f = row['file']#.values()
-	count = count + 1	
-	print(str(count)+": proccesing: "+ f[-32:-4])	
+	count = count + 1
+	print(str(count)+": proccesing: "+ f[-32:-4])
 	# Read file
 	dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
 	data = dataobj.load()
@@ -75,4 +75,3 @@ for i, row in files.iterrows():
 	#plt.savefig(f[-43:-4]+'.png')
 	plt.savefig(f[-32:-4]+'.png')
 	plt.close()
-
