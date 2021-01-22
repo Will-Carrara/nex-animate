@@ -159,7 +159,7 @@ class L1GPaired(object):
         path1 = os.path.join(self.data_path1, tile, str(year))
         return [int(day) for day in os.listdir(path1)]
 
-    def files(self, tile=None, year=None, dayofyear=None, how='inner', cachedir='.tmp'):
+    def files(self, tile=None, year=None, dayofyear=None, how='inner', cachedir=''):
         '''
         Get filelists for each data directory and join in space-time
 

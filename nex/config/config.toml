@@ -1,11 +1,19 @@
-# Satellite configuration file
-
+# Satellite Configuration File
+#                                                                            (REQUIRED)
 # [SAMPLE_FORMAT]
-#    collection = 'SATELLITE/DATA/PATH'  # path to earth engine data       (REQUIRED)
-#    bands = ['Bx']                      # bands of interest               (REQUIRED)
-#    names = ['eto']                     # corresponding lower case names  (REQUIRED)
+#    collection = 'SATELLITE/DATA/PATH'  # path toGeomNEX data                    X
+#    sensor = 'GXX'                      # corresponding sensor                   X
+#    tile = 'GXX'                        # tile to retrieve  [Global Grid System] X
+#    year = 2021                         # year of interest                       X
+#    doys = [247,248]                    # day range of interest [exclusive]      X
+#    hour = 14                           # hour of interest [24hr]                X
+
 
 [ANIMATE]
-   collection = 'projects/climate-engine/cimis/daily'
-   bands = ['ETo']
-   names = ['eto']
+    collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
+    sensor = 'G17'
+    tile = 'h09v03'
+    year = 2020
+    doys = [247,248]
+    hour = 18
+
