@@ -1,8 +1,8 @@
-# NASA EARTH EXCHANGE ANIMATION
+# NASA EARTH EXCHANGE ANIMATE
 >
 >
 > ## Abstract
-> This document provides a brief description of the animation tool set developed by the NASA Earth Exchange program. These tools can be used to animate remote sensing data with a .HDF file extension. This process uses a deep learning VAE-GAN Architecture for unsupervised image-to-image translation with shared spectral reconstruction loss which was trained on GOES-16/17 and Himawari-8 L1B data processed by GeoNEX. More information on this model can be found [here]('https://github.com/tjvandal/unsupervised-spectral-synthesis').
+> This document provides a brief description of the animation tool set developed by the NASA Earth Exchange program. These tools can be used to animate remote sensing data with a .HDF file extension. To approximate true color, this process uses a deep learning VAE-GAN Architecture for unsupervised image-to-image translation with shared spectral reconstruction loss which was trained on GOES-16/17 and Himawari-8 L1B data processed by GeoNEX. More information on this model can be found [here](https://github.com/tjvandal/unsupervised-spectral-synthesis).
 >
 >
 > ## Tutorial
@@ -11,7 +11,7 @@
 >
 >
 > ## Data Availability
-> Data is available through the NEX data portal for all states in the contiguous U.S. Data is available from January 1st, 2019 through present (up through the most recently available GOES-16/17 and Himawari-8 L1B SR data for each location).
+> Data is available through the GeoNEX data portal for all states in the contiguous U.S. Data is available from January 1st, 2019 through present (up through the most recently available GOES-16/17 and Himawari-8 L1B SR data for each location).
 >
 >
 > ## Restrictions
