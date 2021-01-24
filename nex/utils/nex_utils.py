@@ -1,29 +1,27 @@
 # _________________________ NASA AMES RESEARCH CENTER _________________________
 # title           : nex_utils.py
-# description     : A series of functions which
+# description     : A series of utility functions to be used in the animation
+#                   and color correction process.
 #
-#                       |> Variables:
-#                           -> NDVI (Normalized Difference Vegetation Index)
-#                           -> Fc   (fractional cover)
-#                           -> ETo  (reference evapotranspiration)
-#                           -> Kcb  (basal crop coefficient)
-#                           -> ETc  (basal crop evapotranspiration)
+#                       |> Functions:
+#                           -> scale_rgb (green band scaling)
+#                           -> make_gif   (png images to gif)
 #
-# author          : Will Carrara, Alberto Guzman
-# date            : 12-16-2020
+# author          : Will Carrara
+# date            : 01-22-2021
 #
-# version         : 1.5
+# version         : 1.3
 # python_version  : 3.*
 # _____________________________________________________________________________
-
-
-
+import os
+import imageio
 
 N = M = 600
 MAX_SCALE = 6000
 
 def scale_rgb(data_b1, data_b2, data_b3):
-   # logrithmic strech to match human visual sensibility
+   """ Logarithmic stretch to match human visual sensibility"""
+
    max_in = MAX_SCALE
    max_out = 255
    ref = max_in*0.20          # 10% reflectance as the middle gray
@@ -48,3 +46,16 @@ def scale_rgb(data_b1, data_b2, data_b3):
    data_rgb[:, :, 2] = x.reshape(N, M).astype('u1')
 
    return data_rgb
+
+
+def make_gif():
+   # image directory location
+   png_dir = 'images/'
+   images = []
+
+   for file_name in os.listdir(png_dir):
+       if file_name.endswith('.png'):
+           file_path = os.path.join(png_dir, file_name)
+           images.append(imageio.imread(file_path))
+
+   imageio.mimsave('nex.gif', images, duration=.4)

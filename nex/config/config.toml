@@ -3,10 +3,10 @@
 # [SAMPLE_FORMAT]
 #    collection = 'SATELLITE/DATA/PATH'  # path toGeomNEX data                    X
 #    sensor = 'GXX'                      # corresponding sensor                   X
-#    tile = 'GXX'                        # tile to retrieve  [Global Grid System] X
+#    tile = 'h09v04'                     # tile to retrieve  [Global Grid System] X
 #    year = 2021                         # year of interest                       X
 #    doys = [247,248]                    # day range of interest [exclusive]      X
-#    hour = 14                           # hour of interest [24hr]                X
+#    hours = [12, 22]                    # hour rang of interest [inclusive 24]   X
 
 
 [ANIMATE]
@@ -14,6 +14,6 @@
     sensor = 'G17'
     tile = 'h09v03'
     year = 2020
-    doys = [247,248]
-    hour = 18
+    doys = [247, 248]
+    hours = [14, 24]
 

@@ -11,7 +11,7 @@
 #                       |> Parameters:
 #                           -> config.toml
 #
-# author          : Will Carrara, Alberto Guzman
+# author          : Will Carrara
 # date            : 01-22-2021
 #
 # version         : 1.3
@@ -64,7 +64,8 @@ def animate(path):
     tile = sat['ANIMATE'].get('tile')                  # tile of interest
     year = sat['ANIMATE'].get('year')                  # year of interest
     doys = sat['ANIMATE'].get('doys')                  # day range to retrieve (exclusive)
-    hour = sat['ANIMATE'].get('hour')                  # hour of interest
+    hours = sat['ANIMATE'].get('hours')                # hour of interest
+    frames = sat['ANIMATE'].get('frames') 			   # duration
 
     # model checkpoint file
     config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),'model/params.yaml')
@@ -76,7 +77,7 @@ def animate(path):
     for doy in range(doys[0],doys[1]): files.append(geo.files(tile=tile, year=year, dayofyear=doy))
     files = pd.concat(files)
     files = files.sort_values(['dayofyear','hour','minute'])
-    files = files[(files['hour'] >= 14) & (files['hour'] <= 24)]
+    files = files[(files['hour'] >= hours[0]) & (files['hour'] <= hours[1])]
 
     count = 0
     for i, row in files.iterrows():
@@ -99,13 +100,15 @@ def animate(path):
         B = data[:,:,0:1]
 
         # scaling AHI closer to true green
-        F = 0.04
-        G = G * F + (1-F) * R
+        #F = 0.04
+        #G = G * F + (1-F) * R
+
+        virtual_rgb = nex_utls.scale_rgb(R,G,B)
 
         # assemble virtual rgb image and scale
-        virtual_rgb = np.concatenate([R, G, B], axis=2)
-        virtual_rgb[virtual_rgb < 0.] = 0
-        virtual_rgb /= 1.6
+        #virtual_rgb = np.concatenate([R, G, B], axis=2)
+        #virtual_rgb[virtual_rgb < 0.] = 0
+        #virtual_rgb /= 1.6
 
         # make and save image to disk
         plt.figure(figsize=(10,10))
@@ -115,3 +118,6 @@ def animate(path):
         #plt.savefig(f[-43:-4]+'.png')
         plt.savefig('images/'+f[-32:-4]+'.png')
         plt.close()
+
+animate()
+nex_utls.make_gif()
