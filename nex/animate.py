@@ -141,10 +141,10 @@ def animate(path):
         plt.imshow(virtual_rgb**0.5)
         
         ax = plt.add_subplot(111)	
-        plt.text(0.95, 0.01, 'y+"-"+m+"-"+d+" "+t',
+        plt.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
         verticalalignment='bottom', horizontalalignment='right',
         transform=ax.transAxes,
-        color='black', fontsize=15)
+        color='white', fontsize=20)
 
         plt.axis('off')
         plt.tight_layout()
