@@ -83,6 +83,12 @@ def animate(path):
     count = 0
     for i, row in files.iterrows():
         f = row['file']
+        
+        # extract date
+        y = f[-32:-28]
+        m = f[-28:-26]
+        d = f[-26:-24]
+        t = f[-23:-19]
 
         # iterate counter
         count = count + 1
@@ -110,10 +116,16 @@ def animate(path):
         virtual_rgb = np.concatenate([R, G, B], axis=2)
         virtual_rgb[virtual_rgb < 0.] = 0
         virtual_rgb /= 1.6
-
+        
         # make and save image to disk
-        plt.figure(figsize=(10,10))
+        fig = plt.figure(figsize=(10,10)) 
+        ax = fig.add_subplot(111)
         plt.imshow(virtual_rgb**0.5)
+        ax.text(0.95, 0.01, 'y+"-"+m+"-"+d+" "+t',
+        verticalalignment='bottom', horizontalalignment='right',
+        transform=ax.transAxes,
+        color='black', fontsize=15)
+
         plt.axis('off')
         plt.tight_layout()
         #plt.savefig(f[-43:-4]+'.png')
@@ -121,11 +133,32 @@ def animate(path):
         plt.savefig(w+'images/{}'.format(name))
         plt.close()
 
+
+
+        '''
+        # make and save image to disk
+        plt.figure(figsize=(10,10))
+        plt.imshow(virtual_rgb**0.5)
+        
+        ax = plt.add_subplot(111)	
+        plt.text(0.95, 0.01, 'y+"-"+m+"-"+d+" "+t',
+        verticalalignment='bottom', horizontalalignment='right',
+        transform=ax.transAxes,
+        color='black', fontsize=15)
+
+        plt.axis('off')
+        plt.tight_layout()
+        #plt.savefig(f[-43:-4]+'.png')
+        name = f[-32:-4]
+        plt.savefig(w+'images/{}'.format(name))
+        plt.close()
+	'''
 # create png images
 animate(path)
 
 # convert to gif
 nex_utils.make_gif()
 
+remove = True
 # remove png files
 if remove: nex_utils.empty_dir()
