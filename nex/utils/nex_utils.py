@@ -13,18 +13,22 @@
 # version         : 1.3
 # python_version  : 3.*
 # _____________________________________________________________________________
+
+# system handling
 import os
 import glob
 
+# image handling
 import imageio
 
+# data processing
 import numpy as np
 
 N = M = 600
 MAX_SCALE = 6000
 
 def scale_rgb(data_b1, data_b2, data_b3):
-   """ Logarithmic stretch to match human visual sensibility"""
+   """Logarithmic stretch to match human visual sensibility"""
 
    max_in = MAX_SCALE
    max_out = 255
@@ -53,6 +57,8 @@ def scale_rgb(data_b1, data_b2, data_b3):
 
 
 def make_gif():
+  """ Generate .gif file"""
+
    # image directory location
    png_dir = 'images/'
    images = []
@@ -66,6 +72,8 @@ def make_gif():
 
 
 def empty_dir():
+    """Remove old images"""
+
     # resulted images
     files = glob.glob('images/*.png')
     for f in files:

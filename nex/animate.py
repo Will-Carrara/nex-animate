@@ -65,7 +65,8 @@ def animate(path):
     year = sat['ANIMATE'].get('year')                  # year of interest
     doys = sat['ANIMATE'].get('doys')                  # day range to retrieve (exclusive)
     hours = sat['ANIMATE'].get('hours')                # hour of interest
-    frames = sat['ANIMATE'].get('frames') 			   # duration
+    frames = sat['ANIMATE'].get('frames')              # duration
+    remove = sat['ANIMATE'].get('remove')              # remove resultant png images
 
     # model checkpoint file
     config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),'model/params.yaml')
@@ -120,6 +121,11 @@ def animate(path):
         plt.savefig(w+'images/{}'.format(name))
         plt.close()
 
+# create png images
 animate(path)
+
+# convert to gif
 nex_utils.make_gif()
-nex_utils.empty_dir()
+
+# remove png files
+if remove: nex_utils.empty_dir()

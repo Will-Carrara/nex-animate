@@ -10,7 +10,7 @@
 > 1. [Using NEX-Animate](docs/tutorial.md)
 >
 > ## Example Output
-> <img src="docs/nex.gif"/>
+> <img src="docs/img/nex.gif"/>
 >
 >
 > ## Data Availability
