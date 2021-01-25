@@ -7,7 +7,7 @@
 #    year = 2021                         # year of interest                       X
 #    doys = [247,248]                    # day range of interest [exclusive]      X
 #    hours = [12, 22]                    # hour rang of interest [inclusive 24]   X
-#    remove = false                      # remove png images after animation      X
+#    remove = False                      # remove png images after animation      X
 
 
 [ANIMATE]
@@ -17,4 +17,4 @@
     year = 2020
     doys = [247, 248]
     hours = [14, 24]
-    remove = true
+    remove = True

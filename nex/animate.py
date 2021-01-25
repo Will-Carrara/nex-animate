@@ -83,7 +83,7 @@ def animate(path):
     count = 0
     for i, row in files.iterrows():
         f = row['file']
-        
+
         # extract date
         y = f[-32:-28]
         m = f[-28:-26]
@@ -116,9 +116,9 @@ def animate(path):
         virtual_rgb = np.concatenate([R, G, B], axis=2)
         virtual_rgb[virtual_rgb < 0.] = 0
         virtual_rgb /= 1.6
-        
+
         # make and save image to disk
-        fig = plt.figure(figsize=(10,10)) 
+        fig = plt.figure(figsize=(10,10))
         ax = fig.add_subplot(111)
         plt.imshow(virtual_rgb**0.5)
         ax.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
@@ -140,6 +140,5 @@ animate(path)
 # convert to gif
 nex_utils.make_gif()
 
-remove = True
 # remove png files
 if remove: nex_utils.empty_dir()
