@@ -121,7 +121,7 @@ def animate(path):
         fig = plt.figure(figsize=(10,10)) 
         ax = fig.add_subplot(111)
         plt.imshow(virtual_rgb**0.5)
-        ax.text(0.95, 0.01, 'y+"-"+m+"-"+d+" "+t',
+        ax.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
         verticalalignment='bottom', horizontalalignment='right',
         transform=ax.transAxes,
         color='black', fontsize=15)
@@ -134,25 +134,6 @@ def animate(path):
         plt.close()
 
 
-
-        '''
-        # make and save image to disk
-        plt.figure(figsize=(10,10))
-        plt.imshow(virtual_rgb**0.5)
-        
-        ax = plt.add_subplot(111)	
-        plt.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
-        verticalalignment='bottom', horizontalalignment='right',
-        transform=ax.transAxes,
-        color='white', fontsize=20)
-
-        plt.axis('off')
-        plt.tight_layout()
-        #plt.savefig(f[-43:-4]+'.png')
-        name = f[-32:-4]
-        plt.savefig(w+'images/{}'.format(name))
-        plt.close()
-	'''
 # create png images
 animate(path)
 
