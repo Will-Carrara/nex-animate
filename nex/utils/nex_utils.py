@@ -13,6 +13,8 @@
 # version         : 1.3
 # python_version  : 3.*
 # _____________________________________________________________________________
+import math
+import numpy as np
 import os
 import imageio
 
@@ -26,23 +28,23 @@ def scale_rgb(data_b1, data_b2, data_b3):
    max_out = 255
    ref = max_in*0.20          # 10% reflectance as the middle gray
    offset = max_out*0.5       # corresponding to ref
-   scale = max_out*0.20/log(2.0)  # 20% linear increase for 2x in reflectance
+   scale = max_out*0.20/np.log(2.0)  # 20% linear increase for 2x in reflectance
 
-   data_rgb = zeros((N, M, 3), 'u1')
+   data_rgb = np.zeros((N, M, 3), 'u1')
 
-   x = clip(data_b1, 1, max_in).astype('f4') # 1 will be zero in logarithm
-   x = (log(x) - log(ref))*scale + offset
-   x = clip(x, 0, max_out) # 1 will be zero in logarithm
+   x = np.clip(data_b1, 1, max_in).astype('f4') # 1 will be zero in logarithm
+   x = (np.log(x) - np.log(ref))*scale + offset
+   x = np.clip(x, 0, max_out) # 1 will be zero in logarithm
    data_rgb[:, :, 0] = x.reshape(N, M).astype('u1')
 
-   x = clip(data_b2, 1, max_in).astype('f4') # 1 will be zero in logarithm
-   x = (log(x) - log(ref))*scale + offset
-   x = clip(x, 0, max_out) # 1 will be zero in logarithm
+   x = np.clip(data_b2, 1, max_in).astype('f4') # 1 will be zero in logarithm
+   x = (np.log(x) - np.log(ref))*scale + offset
+   x = np.clip(x, 0, max_out) # 1 will be zero in logarithm
    data_rgb[:, :, 1] = x.reshape(N, M).astype('u1')
 
-   x = clip(data_b3, 1, max_in).astype('f4') # 1 will be zero in logarithm
-   x = (log(x) - log(ref))*scale + offset
-   x = clip(x, 0, max_out) # 1 will be zero in logarithm
+   x = np.clip(data_b3, 1, max_in).astype('f4') # 1 will be zero in logarithm
+   x = (np.log(x) - np.log(ref))*scale + offset
+   x = np.clip(x, 0, max_out) # 1 will be zero in logarithm
    data_rgb[:, :, 2] = x.reshape(N, M).astype('u1')
 
    return data_rgb

@@ -34,14 +34,14 @@ import pandas as pd
 import numpy as np
 
 # utility files
-from utils.model import inference
+from model import inference
 from utils import geonexl1g, nex_utils
 
 # current directory
-w = os.path.join(os.path.dirname(__file__), '..')
+w = os.path.join(os.path.dirname(__file__))
 
 # path for .toml configuration
-path = w+'/config/config.toml'
+path = w+'config/config.toml'
 
 def animate(path):
     """Loads satellite collection for animation process.
@@ -53,7 +53,7 @@ def animate(path):
         image (object): An series of .png images at discrete intervals
 
     Examples:
-        >>> animate('../config/config.toml')
+        >>> animate('config/config.toml')
     """
 
     # read satellite data file
@@ -103,7 +103,7 @@ def animate(path):
         #F = 0.04
         #G = G * F + (1-F) * R
 
-        virtual_rgb = nex_utls.scale_rgb(R,G,B)
+        virtual_rgb = nex_utils.scale_rgb(R,G,B)
 
         # assemble virtual rgb image and scale
         #virtual_rgb = np.concatenate([R, G, B], axis=2)
@@ -116,8 +116,9 @@ def animate(path):
         plt.axis('off')
         plt.tight_layout()
         #plt.savefig(f[-43:-4]+'.png')
-        plt.savefig('images/'+f[-32:-4]+'.png')
+        name = f[-32:-4]
+        plt.savefig(w+'images/{}'.format(name))
         plt.close()
 
-animate()
-nex_utls.make_gif()
+animate(path)
+nex_utils.make_gif()

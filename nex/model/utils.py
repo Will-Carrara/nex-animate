@@ -71,4 +71,4 @@ def get_config(yaml_file):
         (dict): dictionary of parameters
     '''
     with open(yaml_file) as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
