@@ -13,10 +13,12 @@
 # version         : 1.3
 # python_version  : 3.*
 # _____________________________________________________________________________
-import math
-import numpy as np
 import os
+import glob
+
 import imageio
+
+import numpy as np
 
 N = M = 600
 MAX_SCALE = 6000
@@ -61,3 +63,10 @@ def make_gif():
            images.append(imageio.imread(file_path))
 
    imageio.mimsave('nex.gif', images, duration=.4)
+
+
+def empty_dir():
+    # resulted images
+    files = glob.glob('images/*.png')
+    for f in files:
+        os.remove(f)

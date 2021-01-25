@@ -122,3 +122,4 @@ def animate(path):
 
 animate(path)
 nex_utils.make_gif()
+nex_utils.empty_dir()
