@@ -124,7 +124,7 @@ def animate(path):
         ax.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
         verticalalignment='bottom', horizontalalignment='right',
         transform=ax.transAxes,
-        color='black', fontsize=15)
+        color='white', fontsize=20)
 
         plt.axis('off')
         plt.tight_layout()
@@ -140,5 +140,6 @@ animate(path)
 # convert to gif
 nex_utils.make_gif()
 
+remove = False
 # remove png files
 if remove: nex_utils.empty_dir()
