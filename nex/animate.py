@@ -100,15 +100,15 @@ def animate(path):
         B = data[:,:,0:1]
 
         # scaling AHI closer to true green
-        #F = 0.04
-        #G = G * F + (1-F) * R
+        F = 0.05
+        G = G * F + (1-F) * R
 
-        virtual_rgb = nex_utils.scale_rgb(R,G,B)
+        #virtual_rgb = nex_utils.scale_rgb(R,G,B)
 
         # assemble virtual rgb image and scale
-        #virtual_rgb = np.concatenate([R, G, B], axis=2)
-        #virtual_rgb[virtual_rgb < 0.] = 0
-        #virtual_rgb /= 1.6
+        virtual_rgb = np.concatenate([R, G, B], axis=2)
+        virtual_rgb[virtual_rgb < 0.] = 0
+        virtual_rgb /= 1.6
 
         # make and save image to disk
         plt.figure(figsize=(10,10))
