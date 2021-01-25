@@ -17,4 +17,3 @@
 >
 >The following graphic illustrates the tiling system used:
 > <img src="img/globalgridsystem.png"/>
->

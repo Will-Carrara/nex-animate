@@ -6,7 +6,7 @@
 >
 >
 > ## Tutorial
-> A detailed walk-through on the operation of these tools has been assembled in the following series of documentation contained in the links below:
+> A detailed walk-through on the operation of this tool has been assembled in the following series of documentation contained in the links below:
 > 1. [Using NEX-Animate](docs/tutorial.md)
 >
 > ## Example Output
