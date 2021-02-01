@@ -12,9 +12,9 @@
 #                           -> config.toml
 #
 # author          : Will Carrara
-# date            : 01-22-2021
+# date            : 02-01-2021
 #
-# version         : 1.3
+# version         : 1.4
 # python_version  : 3.*
 # _____________________________________________________________________________
 
@@ -34,11 +34,9 @@ import pandas as pd
 import numpy as np
 
 # utility files
-#from model import inference
-#from utils import geonexl1g, nex_utils
+from model import inference
+from utils import geonexl1g, nex_utils
 
-
-from utils import nex_utils
 # current directory
 w = os.path.join(os.path.dirname(__file__))
 

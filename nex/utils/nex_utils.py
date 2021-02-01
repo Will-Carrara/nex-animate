@@ -8,9 +8,9 @@
 #                           -> make_gif   (png images to gif)
 #
 # author          : Will Carrara
-# date            : 01-22-2021
+# date            : 02-01-2021
 #
-# version         : 1.3
+# version         : 1.4
 # python_version  : 3.*
 # _____________________________________________________________________________
 
@@ -77,5 +77,4 @@ def empty_dir():
 
     # resulted images
     files = glob.glob('images/*.png')
-    for f in files:
-        os.remove(f)
+    for f in files: os.remove(f)
