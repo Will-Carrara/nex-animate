@@ -34,9 +34,11 @@ import pandas as pd
 import numpy as np
 
 # utility files
-from model import inference
-from utils import geonexl1g, nex_utils
+#from model import inference
+#from utils import geonexl1g, nex_utils
 
+
+from utils import nex_utils
 # current directory
 w = os.path.join(os.path.dirname(__file__))
 
@@ -67,7 +69,7 @@ def animate(path):
     hours = sat['ANIMATE'].get('hours')                # hour of interest
     frames = sat['ANIMATE'].get('frames')              # duration
     remove = sat['ANIMATE'].get('remove')              # remove resultant png images
-    
+
     # convert string to booelan
     str_bool = lambda x: True if x.lower()=='true' else False
     remove = str_bool(remove)
@@ -88,13 +90,13 @@ def animate(path):
     for i, row in files.iterrows():
         f = row['file']
         f_split = f.split('_')
-    
+
         # extract date
-        y = f_split[2][0:4] 
+        y = f_split[2][0:4]
         m = f_split[2][4:6]
         d = f_split[2][6:8]
         t = f_split[3]
-        
+
         # iterate counter
         count = count + 1
         print(str(count)+": processing: "+ f_split[5])
@@ -133,18 +135,18 @@ def animate(path):
 
         plt.axis('off')
         plt.tight_layout()
-        #plt.savefig(f[-43:-4]+'.png')
-        name = f[-32:-4]
+
+        name = f_split[0]
         plt.savefig(w+'images/{}'.format(name))
         plt.close()
 
     return remove
 
 # create png images
-remove = animate(path)
+#remove = animate(path)
 
 # convert to gif
 nex_utils.make_gif()
 
 # remove png files
-if remove: nex_utils.empty_dir()
+#if remove: nex_utils.empty_dir()

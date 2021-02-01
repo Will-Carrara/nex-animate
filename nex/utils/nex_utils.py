@@ -63,12 +63,13 @@ def make_gif():
     png_dir = 'images/'
     images = []
 
-    for file_name in os.listdir(png_dir):
+    for file_name in sorted(os.listdir(png_dir)):
        if file_name.endswith('.png'):
            file_path = os.path.join(png_dir, file_name)
            images.append(imageio.imread(file_path))
 
-    imageio.mimsave('nex.gif', images, duration=.4)
+    # save .gif
+    imageio.mimsave('nex.gif', images, duration=.1)
 
 
 def empty_dir():
