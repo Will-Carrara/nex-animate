@@ -136,7 +136,7 @@ def animate(path):
 
         # parse file name
         name = f_split[0].split('/')
-        name = name[5]+'_'+name[7]+'_'+name[8]+'_'+name[9]
+        name = name[5]+'_'+name[7]+'_'+name[8]+'_'+name[9]+t
         
         plt.savefig(w+'images/{}'.format(name))
         plt.close()
