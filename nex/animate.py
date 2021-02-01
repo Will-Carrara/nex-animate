@@ -97,7 +97,7 @@ def animate(path):
 
         # iterate counter
         count = count + 1
-        print(str(count)+": processing: "+ f_split[5])
+        print(str(count)+": processing: "+t)
 
         # read file
         dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
@@ -134,17 +134,20 @@ def animate(path):
         plt.axis('off')
         plt.tight_layout()
 
-        name = f_split[0]
+        # parse file name
+        name = f_split[0].split('/')
+        name = name[5]+'_'+name[7]+'_'+name[8]+'_'+name[9]
+        
         plt.savefig(w+'images/{}'.format(name))
         plt.close()
 
     return remove
 
 # create png images
-#remove = animate(path)
+remove = animate(path)
 
 # convert to gif
 nex_utils.make_gif()
 
 # remove png files
-#if remove: nex_utils.empty_dir()
+if remove: nex_utils.empty_dir()
