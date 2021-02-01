@@ -67,6 +67,10 @@ def animate(path):
     hours = sat['ANIMATE'].get('hours')                # hour of interest
     frames = sat['ANIMATE'].get('frames')              # duration
     remove = sat['ANIMATE'].get('remove')              # remove resultant png images
+    
+    # convert string to booelan
+    str_bool = lambda x: True if x.lower()=='true' else False
+    remove = str_bool(remove)
 
     # model checkpoint file
     config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),'model/params.yaml')
@@ -83,16 +87,17 @@ def animate(path):
     count = 0
     for i, row in files.iterrows():
         f = row['file']
-
+        f_split = f.split('_')
+    
         # extract date
-        y = f[-32:-28]
-        m = f[-28:-26]
-        d = f[-26:-24]
-        t = f[-23:-19]
-
+        y = f_split[2][0:4] 
+        m = f_split[2][4:6]
+        d = f_split[2][6:8]
+        t = f_split[3]
+        
         # iterate counter
         count = count + 1
-        print(str(count)+": processing: "+ f[-32:-4])
+        print(str(count)+": processing: "+ f_split[5])
 
         # read file
         dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
@@ -133,13 +138,13 @@ def animate(path):
         plt.savefig(w+'images/{}'.format(name))
         plt.close()
 
+    return remove
 
 # create png images
-animate(path)
+remove = animate(path)
 
 # convert to gif
 nex_utils.make_gif()
 
-remove = False
 # remove png files
 if remove: nex_utils.empty_dir()
