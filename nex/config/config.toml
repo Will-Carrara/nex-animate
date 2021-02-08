@@ -1,15 +1,5 @@
-# Satellite Configuration File
-#                                                                            (REQUIRED)
-# [SAMPLE_FORMAT]
-#    collection = 'SATELLITE/DATA/PATH'  # path toGeomNEX data                    X
-#    sensor = 'GXX'                      # corresponding sensor                   X
-#    tile = 'h09v04'                     # tile to retrieve  [Global Grid System] X
-#    year = 2021                         # year of interest                       X
-#    doys = [247,248]                    # day range of interest [exclusive]      X
-#    hours = [12, 22]                    # hour rang of interest [inclusive 24]   X
-#    remove = 'False'                    # remove png images after animation      X
 
-
+# August Complex Fire (California 229-317) 
 [ANIMATE]
     collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
     sensor = 'G17'
@@ -17,4 +7,57 @@
     year = 2020
     doys = [247, 248]
     hours = [14, 24]
-    remove = 'False'
+    remove = 'True'
+
+
+# Santiam Fire (Oregon 252-345)
+[ANIMATE1]
+    collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
+    sensor = 'G17'
+    tile = 'h09v02'
+    year = 2020
+    doys = [256, 257]
+    hours = [14, 24]
+    remove = 'True'
+
+# Pearl HIll Fire (Washington 251-349)
+[ANIMATE2]
+    collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
+    sensor = 'G17'
+    tile = 'h09v01'
+    year = 2020
+    doys = [260, 261]
+    hours = [14, 24]
+    remove = 'True'
+
+# Hurricane Laura (Cuba 235-237)
+[ANIMATE3]
+    collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
+    sensor = 'G16'
+    tile = 'h17v06'
+    year = 2020
+    doys = [235, 237]
+    hours = [14, 24]
+    remove = 'True'
+
+
+# Hurricane Sally (Florida 256-258)
+[ANIMATE4]
+    collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
+    sensor = 'G16'
+    tile = 'h16v05'
+    year = 2020
+    doys = [256, 258]
+    hours = [14, 24]
+    remove = 'True'
+
+
+# Tropical Storm Beta (Texas 256-258)
+[ANIMATE5]
+    collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
+    sensor = 'G16'
+    tile = 'h14v05'
+    year = 2020
+    doys = [263, 264]
+    hours = [14, 24]
+    remove = 'True'
