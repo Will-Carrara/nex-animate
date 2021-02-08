@@ -12,9 +12,9 @@
 #                           -> config.toml
 #
 # author          : Will Carrara
-# date            : 02-01-2021
+# date            : 02-08-2021
 #
-# version         : 1.4
+# version         : 1.5
 # python_version  : 3.*
 # _____________________________________________________________________________
 
@@ -48,7 +48,7 @@ def animate(path, key):
 
     Args:
         path (str): A path to a dictionary of remote sensing data (.toml file)
-        
+
         key (str): The name of the dictionary in the config file
 
 
@@ -62,119 +62,99 @@ def animate(path, key):
     # read satellite data file
     sat = toml.load(path)
 
-    L1G_directory = sat[key].get('collection')   # satellite collection to retrieve
-    sensor = sat[key].get('sensor')              # corresponding sensor
-    tile = sat[key].get('tile')                  # tile of interest
-    year = sat[key].get('year')                  # year of interest
-    doys = sat[key].get('doys')                  # day range to retrieve (exclusive)
-    hours = sat[key].get('hours')                # hour of interest
-    frames = sat[key].get('frames')              # duration
-    remove = sat[key].get('remove')              # remove resultant png images
+    for key in sat.keys():
 
-    # convert string to booelan
-    str_bool = lambda x: True if x.lower()=='true' else False
-    remove = str_bool(remove)
+        L1G_directory = sat[key].get('collection')   # satellite collection to retrieve
+        sensor = sat[key].get('sensor')              # corresponding sensor
+        tile = sat[key].get('tile')                  # tile of interest
+        year = sat[key].get('year')                  # year of interest
+        doys = sat[key].get('doys')                  # day range to retrieve (exclusive)
+        hours = sat[key].get('hours')                # hour of interest
+        frames = sat[key].get('frames')              # duration
+        remove = sat[key].get('remove')              # remove resultant png images
+        file_name = sat[key].get('name')             # output file name
 
-    # model checkpoint file
-    config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),'model/params.yaml')
-    model, _ = inference.load_model(config_file)
+        # convert string to booelan
+        str_bool = lambda x: True if x.lower()=='true' else False
+        remove = str_bool(remove)
 
-    # retrieve tiles
-    files = []
-    geo = geonexl1g.GeoNEXL1G(L1G_directory, sensor)
-    for doy in range(doys[0],doys[1]): files.append(geo.files(tile=tile, year=year, dayofyear=doy))
-    files = pd.concat(files)
-    files = files.sort_values(['dayofyear','hour','minute'])
-    files = files[(files['hour'] >= hours[0]) & (files['hour'] <= hours[1])]
+        # model checkpoint file
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),'model/params.yaml')
+        model, _ = inference.load_model(config_file)
 
-    count = 0
-    for i, row in files.iterrows():
-        f = row['file']
-        f_split = f.split('_')
+        # retrieve tiles
+        files = []
+        geo = geonexl1g.GeoNEXL1G(L1G_directory, sensor)
+        for doy in range(doys[0],doys[1]): files.append(geo.files(tile=tile, year=year, dayofyear=doy))
+        files = pd.concat(files)
 
-        # extract date
-        y = f_split[2][0:4]
-        m = f_split[2][4:6]
-        d = f_split[2][6:8]
-        t = f_split[3]
+        # check if empty collection
+        if file.shape[0] == 0:
+            print("The requested satellite overpass data is not available.")
+            quit()
 
-        # iterate counter
-        count = count + 1
-        print(str(count)+": processing: "+t)
+        files = files.sort_values(['dayofyear','hour','minute'])
+        files = files[(files['hour'] >= hours[0]) & (files['hour'] <= hours[1])]
 
-        # read file
-        dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
-        data = dataobj.load()
+        count = 0
+        for i, row in files.iterrows():
+            f = row['file']
+            f_split = f.split('_')
 
-        # translate domains
-        h8_prediction = inference.domain_to_domain(model, data, sensor, 'H8')
+            # extract date
+            y = f_split[2][0:4]
+            m = f_split[2][4:6]
+            d = f_split[2][6:8]
+            t = f_split[3]
 
-        # get rgb
-        R = data[:,:,1:2]
-        G = h8_prediction[:,:,1:2]
-        B = data[:,:,0:1]
+            # iterate counter
+            count = count + 1
+            print(str(count)+": processing: "+t)
 
-        # scaling AHI closer to true green
-        F = 0.05
-        G = G * F + (1-F) * R
+            # read file
+            dataobj = geonexl1g.L1GFile(f, resolution_km=1.)
+            data = dataobj.load()
 
-        #virtual_rgb = nex_utils.scale_rgb(R,G,B)
+            # translate domains
+            h8_prediction = inference.domain_to_domain(model, data, sensor, 'H8')
 
-        # assemble virtual rgb image and scale
-        virtual_rgb = np.concatenate([R, G, B], axis=2)
-        virtual_rgb[virtual_rgb < 0.] = 0
-        virtual_rgb /= 1.6
+            # get rgb
+            R = data[:,:,1:2]
+            G = h8_prediction[:,:,1:2]
+            B = data[:,:,0:1]
 
-        # make and save image to disk
-        fig = plt.figure(figsize=(10,10))
-        ax = fig.add_subplot(111)
-        plt.imshow(virtual_rgb**0.5)
-        ax.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
-        verticalalignment='bottom', horizontalalignment='right',
-        transform=ax.transAxes,
-        color='white', fontsize=20)
+            # scaling AHI closer to true green
+            F = 0.05
+            G = G * F + (1-F) * R
 
-        plt.axis('off')
-        plt.tight_layout()
+            #virtual_rgb = nex_utils.scale_rgb(R,G,B)
 
-        # parse file name
-        name = f_split[0].split('/')
-        name = name[5]+'_'+name[7]+'_'+name[8]+'_'+name[9]+t
-        
-        plt.savefig(w+'images/{}'.format(name))
-        plt.close()
+            # assemble virtual rgb image and scale
+            virtual_rgb = np.concatenate([R, G, B], axis=2)
+            virtual_rgb[virtual_rgb < 0.] = 0
+            virtual_rgb /= 1.6
 
-    return remove
+            # make and save image to disk
+            fig = plt.figure(figsize=(10,10))
+            ax = fig.add_subplot(111)
+            plt.imshow(virtual_rgb**0.5)
+            ax.text(0.95, 0.01, y+"-"+m+"-"+d+" "+t,
+            verticalalignment='bottom', horizontalalignment='right',
+            transform=ax.transAxes,
+            color='white', fontsize=20)
 
+            plt.axis('off')
+            plt.tight_layout()
 
-# create png images and convert to gif
-remove = animate(path, 'ANIMATE1')
-nex_utils.make_gif('august_complex_fire')
-if remove: nex_utils.empty_dir()
+            # parse file name
+            name = f_split[0].split('/')
+            name = name[5]+'_'+name[7]+'_'+name[8]+'_'+name[9]+t
 
-remove = animate(path, 'ANIMATE2')
-nex_utils.make_gif('santiam_fire')
-if remove: nex_utils.empty_dir()
+            plt.savefig(w+'images/{}'.format(name))
+            plt.close()
 
-remove = animate(path, 'ANIMATE3')
-nex_utils.make_gif('pearl_hill_fire')
-if remove: nex_utils.empty_dir()
+    # convert .png images to .gif file
+    nex_utils.make_gif(file_name)
 
-remove = animate(path, 'ANIMATE4')
-nex_utils.make_gif('santiam_fire')
-if remove: nex_utils.empty_dir()
-
-remove = animate(path, 'ANIMATE5')
-nex_utils.make_gif('hurricane_laura')
-if remove: nex_utils.empty_dir()
-
-remove = animate(path, 'ANIMATE6')
-nex_utils.make_gif('hurricane_sally')
-if remove: nex_utils.empty_dir()
-
-remove = animate(path, 'ANIMATE7')
-nex_utils.make_gif('tropical_storm_beta')
-if remove: nex_utils.empty_dir()
-
-# remove png files
-#if remove: nex_utils.empty_dir()
+    # remove .png files if desired
+    if remove: nex_utils.empty_dir()

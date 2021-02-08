@@ -8,9 +8,9 @@
 #                           -> make_gif   (png images to gif)
 #
 # author          : Will Carrara
-# date            : 02-01-2021
+# date            : 02-08-2021
 #
-# version         : 1.4
+# version         : 1.5
 # python_version  : 3.*
 # _____________________________________________________________________________
 
@@ -28,7 +28,7 @@ N = M = 600
 MAX_SCALE = 6000
 
 def scale_rgb(data_b1, data_b2, data_b3):
-    """Logarithmic stretch to match human visual sensibility"""
+    """Logarithmic stretch to match human visual sensibility."""
 
     max_in = MAX_SCALE
     max_out = 255
@@ -57,7 +57,7 @@ def scale_rgb(data_b1, data_b2, data_b3):
 
 
 def make_gif(name):
-    """ Generate .gif file"""
+    """ Generate .gif file."""
 
     # image directory location
     png_dir = 'images/'
@@ -68,12 +68,12 @@ def make_gif(name):
            file_path = os.path.join(png_dir, file_name)
            images.append(imageio.imread(file_path))
 
-    # save .gif
-    imageio.mimsave(name+'.gif', images, duration=.1)
+    # save as .gif
+    imageio.mimsave('output/'+name+'.gif', images, duration=.1)
 
 
 def empty_dir():
-    """Remove old images"""
+    """Remove old images."""
 
     # resulted images
     files = glob.glob('images/*.png')

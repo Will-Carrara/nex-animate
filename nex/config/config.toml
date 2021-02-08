@@ -1,12 +1,13 @@
-# August Complex Fire (California 229-317) 
+# August Complex Fire (California 229-317)
 [ANIMATE1]
     collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
     sensor = 'G17'
     tile = 'h09v03'
     year = 2020
     doys = [247, 248]
-    hours = [14, 24]
+    hours = [15, 24]
     remove = 'True'
+    name = "august_complex_fire"
 
 
 # Santiam Fire (Oregon 252-345)
@@ -15,19 +16,21 @@
     sensor = 'G17'
     tile = 'h09v02'
     year = 2020
-    doys = [256, 257]
-    hours = [14, 24]
+    doys = [257, 258]
+    hours = [15, 24]
     remove = 'True'
+    name = "santiam_fire"
 
-# Pearl HIll Fire (Washington 251-349)
+# Pearl Hill Fire (Washington 251-349)
 [ANIMATE3]
     collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
     sensor = 'G17'
     tile = 'h09v01'
     year = 2020
-    doys = [260, 261]
-    hours = [14, 24]
+    doys = [263, 264]
+    hours = [15, 24]
     remove = 'True'
+    name = "pearl_hill_fire"
 
 # Hurricane Laura (Cuba 235-237)
 [ANIMATE4]
@@ -38,6 +41,7 @@
     doys = [235, 237]
     hours = [14, 24]
     remove = 'True'
+    name = "hurricane_laura"
 
 
 # Hurricane Sally (Florida 256-258)
@@ -49,6 +53,7 @@
     doys = [256, 258]
     hours = [14, 24]
     remove = 'True'
+    name = "hurricane_sally"
 
 
 # Tropical Storm Beta (Texas 256-258)
@@ -60,3 +65,4 @@
     doys = [263, 264]
     hours = [14, 24]
     remove = 'True'
+    name = "tropical_storm_beta"
