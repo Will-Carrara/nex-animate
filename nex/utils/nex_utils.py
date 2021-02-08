@@ -56,7 +56,7 @@ def scale_rgb(data_b1, data_b2, data_b3):
     return data_rgb
 
 
-def make_gif():
+def make_gif(name):
     """ Generate .gif file"""
 
     # image directory location
@@ -69,7 +69,7 @@ def make_gif():
            images.append(imageio.imread(file_path))
 
     # save .gif
-    imageio.mimsave('nex.gif', images, duration=.1)
+    imageio.mimsave(name+'.gif', images, duration=.1)
 
 
 def empty_dir():

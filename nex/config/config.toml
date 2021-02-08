@@ -1,5 +1,5 @@
 # August Complex Fire (California 229-317) 
-[ANIMATE]
+[ANIMATE1]
     collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
     sensor = 'G17'
     tile = 'h09v03'
@@ -10,7 +10,7 @@
 
 
 # Santiam Fire (Oregon 252-345)
-[ANIMATE1]
+[ANIMATE2]
     collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
     sensor = 'G17'
     tile = 'h09v02'
@@ -20,7 +20,7 @@
     remove = 'True'
 
 # Pearl HIll Fire (Washington 251-349)
-[ANIMATE2]
+[ANIMATE3]
     collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
     sensor = 'G17'
     tile = 'h09v01'
@@ -30,7 +30,7 @@
     remove = 'True'
 
 # Hurricane Laura (Cuba 235-237)
-[ANIMATE3]
+[ANIMATE4]
     collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
     sensor = 'G16'
     tile = 'h17v06'
@@ -41,7 +41,7 @@
 
 
 # Hurricane Sally (Florida 256-258)
-[ANIMATE4]
+[ANIMATE5]
     collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
     sensor = 'G16'
     tile = 'h16v05'
@@ -52,7 +52,7 @@
 
 
 # Tropical Storm Beta (Texas 256-258)
-[ANIMATE5]
+[ANIMATE6]
     collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
     sensor = 'G16'
     tile = 'h14v05'

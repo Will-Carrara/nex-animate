@@ -43,11 +43,14 @@ w = os.path.join(os.path.dirname(__file__))
 # path for .toml configuration
 path = w+'config/config.toml'
 
-def animate(path):
+def animate(path, key):
     """Loads satellite collection for animation process.
 
     Args:
         path (str): A path to a dictionary of remote sensing data (.toml file)
+        
+        key (str): The name of the dictionary in the config file
+
 
     Returns:
         image (object): An series of .png images at discrete intervals
@@ -59,14 +62,14 @@ def animate(path):
     # read satellite data file
     sat = toml.load(path)
 
-    L1G_directory = sat['ANIMATE'].get('collection')   # satellite collection to retrieve
-    sensor = sat['ANIMATE'].get('sensor')              # corresponding sensor
-    tile = sat['ANIMATE'].get('tile')                  # tile of interest
-    year = sat['ANIMATE'].get('year')                  # year of interest
-    doys = sat['ANIMATE'].get('doys')                  # day range to retrieve (exclusive)
-    hours = sat['ANIMATE'].get('hours')                # hour of interest
-    frames = sat['ANIMATE'].get('frames')              # duration
-    remove = sat['ANIMATE'].get('remove')              # remove resultant png images
+    L1G_directory = sat[key].get('collection')   # satellite collection to retrieve
+    sensor = sat[key].get('sensor')              # corresponding sensor
+    tile = sat[key].get('tile')                  # tile of interest
+    year = sat[key].get('year')                  # year of interest
+    doys = sat[key].get('doys')                  # day range to retrieve (exclusive)
+    hours = sat[key].get('hours')                # hour of interest
+    frames = sat[key].get('frames')              # duration
+    remove = sat[key].get('remove')              # remove resultant png images
 
     # convert string to booelan
     str_bool = lambda x: True if x.lower()=='true' else False
@@ -143,11 +146,35 @@ def animate(path):
 
     return remove
 
-# create png images
-remove = animate(path)
 
-# convert to gif
-nex_utils.make_gif()
+# create png images and convert to gif
+remove = animate(path, 'ANIMATE1')
+nex_utils.make_gif('august_complex_fire')
+if remove: nex_utils.empty_dir()
+
+remove = animate(path, 'ANIMATE2')
+nex_utils.make_gif('santiam_fire')
+if remove: nex_utils.empty_dir()
+
+remove = animate(path, 'ANIMATE3')
+nex_utils.make_gif('pearl_hill_fire')
+if remove: nex_utils.empty_dir()
+
+remove = animate(path, 'ANIMATE4')
+nex_utils.make_gif('santiam_fire')
+if remove: nex_utils.empty_dir()
+
+remove = animate(path, 'ANIMATE5')
+nex_utils.make_gif('hurricane_laura')
+if remove: nex_utils.empty_dir()
+
+remove = animate(path, 'ANIMATE6')
+nex_utils.make_gif('hurricane_sally')
+if remove: nex_utils.empty_dir()
+
+remove = animate(path, 'ANIMATE7')
+nex_utils.make_gif('tropical_storm_beta')
+if remove: nex_utils.empty_dir()
 
 # remove png files
-if remove: nex_utils.empty_dir()
+#if remove: nex_utils.empty_dir()
