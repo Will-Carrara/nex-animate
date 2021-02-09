@@ -51,7 +51,7 @@
     tile = 'h16v05'
     year = 2020
     doys = [255, 256]
-    hours = [15, 23]
+    hours = [15, 22]
     remove = 'True'
     name = "hurricane_sally"
 
