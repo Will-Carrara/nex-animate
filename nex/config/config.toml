@@ -38,7 +38,7 @@
     sensor = 'G16'
     tile = 'h17v06'
     year = 2020
-    doys = [235, 237]
+    doys = [235, 236]
     hours = [15, 23]
     remove = 'True'
     name = "hurricane_laura"
@@ -50,7 +50,7 @@
     sensor = 'G17'
     tile = 'h16v05'
     year = 2020
-    doys = [255, 258]
+    doys = [255, 256]
     hours = [15, 23]
     remove = 'True'
     name = "hurricane_sally"
