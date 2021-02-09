@@ -13,6 +13,7 @@
 >    doys = [247, 248]
 >    hours = [14, 24]
 >    remove = true
+>    name = 'output_file_name'
 > </pre>
 >
 >The following graphic illustrates the tiling system used:
