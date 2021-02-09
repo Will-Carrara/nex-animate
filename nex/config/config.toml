@@ -27,7 +27,7 @@
     sensor = 'G17'
     tile = 'h09v01'
     year = 2020
-    doys = [263, 264]
+    doys = [265, 266]
     hours = [15, 23]
     remove = 'True'
     name = "pearl_hill_fire"
