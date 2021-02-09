@@ -17,7 +17,7 @@
     tile = 'h09v02'
     year = 2020
     doys = [257, 258]
-    hours = [15, 24]
+    hours = [15, 23]
     remove = 'True'
     name = "santiam_fire"
 
@@ -28,7 +28,7 @@
     tile = 'h09v01'
     year = 2020
     doys = [263, 264]
-    hours = [15, 24]
+    hours = [15, 23]
     remove = 'True'
     name = "pearl_hill_fire"
 
@@ -39,27 +39,27 @@
     tile = 'h17v06'
     year = 2020
     doys = [235, 237]
-    hours = [14, 24]
+    hours = [15, 23]
     remove = 'True'
     name = "hurricane_laura"
 
 
 # Hurricane Sally (Florida 256-258)
 [ANIMATE5]
-    collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
-    sensor = 'G16'
+    collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
+    sensor = 'G17'
     tile = 'h16v05'
     year = 2020
-    doys = [256, 258]
-    hours = [14, 24]
+    doys = [255, 258]
+    hours = [15, 23]
     remove = 'True'
     name = "hurricane_sally"
 
 
 # Tropical Storm Beta (Texas 256-258)
 [ANIMATE6]
-    collection = '/nex/datapool/geonex/public/GOES16/GEONEX-L1G/'
-    sensor = 'G16'
+    collection = '/nex/datapool/geonex/public/GOES17/GEONEX-L1G/'
+    sensor = 'G17'
     tile = 'h14v05'
     year = 2020
     doys = [263, 264]

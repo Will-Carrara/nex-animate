@@ -43,14 +43,11 @@ w = os.path.join(os.path.dirname(__file__))
 # path for .toml configuration
 path = w+'config/config.toml'
 
-def animate(path, key):
+def animate(path):
     """Loads satellite collection for animation process.
 
     Args:
         path (str): A path to a dictionary of remote sensing data (.toml file)
-
-        key (str): The name of the dictionary in the config file
-
 
     Returns:
         image (object): An series of .png images at discrete intervals
@@ -62,6 +59,8 @@ def animate(path, key):
     # read satellite data file
     sat = toml.load(path)
 
+    print(sat)
+    quit()
     for key in sat.keys():
 
         L1G_directory = sat[key].get('collection')   # satellite collection to retrieve
@@ -91,7 +90,7 @@ def animate(path, key):
         # check if empty collection
         if file.shape[0] == 0:
             print("The requested satellite overpass data is not available.")
-            quit()
+            continue
 
         files = files.sort_values(['dayofyear','hour','minute'])
         files = files[(files['hour'] >= hours[0]) & (files['hour'] <= hours[1])]
@@ -158,3 +157,5 @@ def animate(path, key):
 
     # remove .png files if desired
     if remove: nex_utils.empty_dir()
+
+animate(path)
