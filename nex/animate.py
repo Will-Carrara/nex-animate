@@ -85,7 +85,7 @@ def animate(path):
         files = pd.concat(files)
 
         # check if empty collection
-        if file.shape[0] == 0:
+        if files.shape[0] == 0:
             print("The requested satellite overpass data is not available.")
             continue
 
