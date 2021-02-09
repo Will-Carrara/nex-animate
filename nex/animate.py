@@ -58,11 +58,8 @@ def animate(path):
 
     # read satellite data file
     sat = toml.load(path)
-
-    print(sat)
-    quit()
+    
     for key in sat.keys():
-
         L1G_directory = sat[key].get('collection')   # satellite collection to retrieve
         sensor = sat[key].get('sensor')              # corresponding sensor
         tile = sat[key].get('tile')                  # tile of interest
@@ -152,10 +149,10 @@ def animate(path):
             plt.savefig(w+'images/{}'.format(name))
             plt.close()
 
-    # convert .png images to .gif file
-    nex_utils.make_gif(file_name)
+        # convert .png images to .gif file
+        nex_utils.make_gif(file_name)
 
-    # remove .png files if desired
-    if remove: nex_utils.empty_dir()
+        # remove .png files if desired
+        if remove: nex_utils.empty_dir()
 
 animate(path)
