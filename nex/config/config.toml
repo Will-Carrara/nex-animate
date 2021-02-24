@@ -6,7 +6,7 @@
     year = 2020
     doys = [247, 248]
     hours = [15, 24]
-    remove = 'True'
+    remove = 'False'
     name = "august_complex_fire"
 
 
