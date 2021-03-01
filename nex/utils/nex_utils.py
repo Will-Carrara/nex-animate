@@ -8,9 +8,9 @@
 #                           -> make_gif   (png images to gif)
 #
 # author          : Will Carrara
-# date            : 02-08-2021
+# date            : 03-01-2021
 #
-# version         : 1.5
+# version         : 1.1.2
 # python_version  : 3.*
 # _____________________________________________________________________________
 
@@ -20,12 +20,16 @@ import glob
 
 # image handling
 import imageio
+from PIL import ImageEnhance, Image
 
 # data processing
 import numpy as np
 
 N = M = 600
 MAX_SCALE = 6000
+
+# image directory location
+png_dir = 'images/'
 
 def scale_rgb(data_b1, data_b2, data_b3):
     """Logarithmic stretch to match human visual sensibility."""
@@ -56,11 +60,29 @@ def scale_rgb(data_b1, data_b2, data_b3):
     return data_rgb
 
 
+
+def color_fix():
+    """Apply color enhancement."""
+    
+    # loop through images 
+    for file_name in sorted(os.listdir(png_dir)):
+       if file_name.endswith('.png'):
+          file_path = os.path.join(png_dir, file_name) 
+          # read image
+          image = Image.open(file_path)
+          
+          # increase contrast
+          enhancer = ImageEnhance.Contrast(image)
+          image = enhancer.enhance(1.75)
+          
+          # overwrite image
+          image = image.save(png_dir+'/'+file_name) 
+
+
 def make_gif(name):
     """ Generate .gif file."""
-
-    # image directory location
-    png_dir = 'images/'
+    
+    # empty image list
     images = []
 
     for file_name in sorted(os.listdir(png_dir)):
