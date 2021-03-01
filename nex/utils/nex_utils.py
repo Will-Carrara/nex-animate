@@ -63,25 +63,43 @@ def scale_rgb(data_b1, data_b2, data_b3):
 
 def color_fix():
     """Apply color enhancement."""
-    
-    # loop through images 
+
+    # loop through images
     for file_name in sorted(os.listdir(png_dir)):
        if file_name.endswith('.png'):
-          file_path = os.path.join(png_dir, file_name) 
+          file_path = os.path.join(png_dir, file_name)
           # read image
           image = Image.open(file_path)
-          
+
           # increase contrast
           enhancer = ImageEnhance.Contrast(image)
           image = enhancer.enhance(1.75)
-          
-          # overwrite image
-          image = image.save(png_dir+'/'+file_name) 
 
+          # overwrite image
+          image = image.save(png_dir+'/'+file_name)
+
+
+def color_fix():
+    """Apply color enhancement."""
+
+    # loop through images
+    for file_name in sorted(os.listdir(png_dir)):
+       if file_name.endswith('.png'):
+          file_path = os.path.join(png_dir, file_name)
+          
+          # read image
+          image = Image.open(file_path)
+
+          # increase contrast
+          enhancer = ImageEnhance.Contrast(image)
+          image = enhancer.enhance(1.75)
+
+          # overwrite image
+          image = image.save(png_dir+'/'+file_name)
 
 def make_gif(name):
     """ Generate .gif file."""
-    
+
     # empty image list
     images = []
 
