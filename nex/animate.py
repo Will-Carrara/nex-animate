@@ -157,10 +157,5 @@ def animate(path):
 
         # remove .png files if desired
         if remove: nex_utils.empty_dir()
-<<<<<<< HEAD
-=======
-
-        quit()
->>>>>>> 65b9b25fce4d897053a7c98b0985eb5564b28c28
 
 animate(path)
