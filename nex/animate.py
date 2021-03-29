@@ -58,7 +58,7 @@ def animate(path):
 
     # read satellite data file
     sat = toml.load(path)
-    
+
     for key in sat.keys():
         L1G_directory = sat[key].get('collection')   # satellite collection to retrieve
         sensor = sat[key].get('sensor')              # corresponding sensor
@@ -148,14 +148,19 @@ def animate(path):
 
             plt.savefig(w+'images/{}'.format(name))
             plt.close()
-        
-        # apply color enhancement 
+
+        # apply color enhancement
         nex_utils.color_fix()
 
         # convert .png images to .gif file
         nex_utils.make_gif(file_name)
-        
+
         # remove .png files if desired
         if remove: nex_utils.empty_dir()
+<<<<<<< HEAD
+=======
+
+        quit()
+>>>>>>> 65b9b25fce4d897053a7c98b0985eb5564b28c28
 
 animate(path)
